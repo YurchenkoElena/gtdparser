@@ -1,0 +1,9 @@
+export enum JobStatus {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  SUCCESS = 'SUCCESS',
+  FAILED = 'FAILED',
+  DEAD = 'DEAD',
+  REJECTED_NOT_GTD = 'REJECTED_NOT_GTD',
+}
+

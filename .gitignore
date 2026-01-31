@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+*.log
+logs/
+uploads/
+outputs/
+temp/
+.DS_Store
+*.pem
+*.key
+config/adobe_private_key.pem
+
+
+
+
+
