@@ -1,0 +1,2 @@
+export * from './adobe.interface';
+
