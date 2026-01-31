@@ -9,17 +9,20 @@ import {
 
 const PDF_SIGNATURE = Buffer.from('%PDF-');
 
+type PdfParseFunction = (buffer: Buffer) => Promise<{ text: string }>;
+
 @Injectable()
 export class PdfValidatorService {
   private readonly logger = new Logger(PdfValidatorService.name);
-  private pdfParse: ((buffer: Buffer) => Promise<{ text: string }>) | null = null;
+  private pdfParse: PdfParseFunction | null = null;
 
-  private async getPdfParser(): Promise<(buffer: Buffer) => Promise<{ text: string }>> {
+  private async getPdfParser(): Promise<PdfParseFunction> {
     if (!this.pdfParse) {
-      const module = await import('pdf-parse');
-      this.pdfParse = module.default || module;
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const pdfParseModule = require('pdf-parse');
+      this.pdfParse = pdfParseModule.default || pdfParseModule;
     }
-    return this.pdfParse;
+    return this.pdfParse!;
   }
 
   async validate(filePath: string): Promise<PdfValidationResult> {

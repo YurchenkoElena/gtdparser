@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { Worker, Job } from 'bullmq';
 import { QUEUE_NAME, QueueService, RedisService, DlqService, GtdJobData, getBackoffDelay, formatDuration } from '../queue';
 import { PipelineService, ProcessingError } from './pipeline.service';
+import { ProcessingContext } from './interfaces';
 import { JobStatus } from '../../common';
 
 @Injectable()
@@ -83,7 +84,7 @@ export class WorkerService implements OnModuleInit, OnModuleDestroy {
       attempt: job.attemptsMade + 1,
     });
 
-    const context = {
+    const context: ProcessingContext = {
       jobId,
       deal_id,
       file_id,

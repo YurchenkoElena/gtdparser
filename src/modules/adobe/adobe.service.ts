@@ -60,7 +60,7 @@ export class AdobeService {
       this.tokenExpiresAt = Date.now() + response.data.expires_in * 1000;
       this.logger.debug('Adobe access token obtained successfully');
 
-      return this.accessToken;
+      return this.accessToken!;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         throw new AdobeApiError(
